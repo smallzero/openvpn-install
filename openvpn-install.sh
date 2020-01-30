@@ -985,6 +985,10 @@ fi
 	echo "If you want to add more clients, you simply need to run this script another time!"
 }
 
+function newClintOneLiner(){
+	echo "heelo new client of $1"
+}
+
 function newClient () {
 	echo ""
 	echo "Tell me a name for the client."
@@ -1251,9 +1255,15 @@ function manageMenu () {
 # Check for root, TUN, OS...
 initialCheck
 
+
 # Check if OpenVPN is already installed
 if [[ -e /etc/openvpn/server.conf ]]; then
-	manageMenu
+	# Check if one liner
+	if [[ $1 = "-c" ]]; then
+		newClintOneLiner
+	else
+		manageMenu
+	fi
 else
 	installOpenVPN
 fi
