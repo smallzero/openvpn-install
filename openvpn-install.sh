@@ -1167,6 +1167,7 @@ function revokeClient () {
 	echo ""
 	echo "Certificate for client $CLIENT revoked."
 	rm -f /etc/openvpn/google-authenticator/${CLIENT}
+	userdel -r $CLIENT
 }
 
 function removeUnbound () {
