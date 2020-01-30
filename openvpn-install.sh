@@ -991,7 +991,7 @@ function newClientOneLiner(){
 	echo "Create New Client username is: $CLIENT"
 	cd /etc/openvpn/easy-rsa/ || return
 	./easyrsa build-client-full "$CLIENT" nopass
-	useradd --shell /bin/false  -p $(openssl passwd -1 $CLIENT_PASSWD) $CLIENT
+	useradd  -p $(openssl passwd -1 $CLIENT_PASSWD) $CLIENT
 	# Home directory of the user, where the client configuration (.ovpn) will be written
 	if [ -e "/home/$CLIENT" ]; then  # if $1 is a user name
 		homeDir="/home/$CLIENT"
@@ -1041,6 +1041,10 @@ function newClientOneLiner(){
 	echo ""
 	echo "Client $CLIENT added, the configuration file is available at $homeDir/$CLIENT.ovpn."
 	echo "Download the .ovpn file and import it in your OpenVPN client."
+	LABEL='RedStorm OpenVPN Server'
+	#su ${CLIENT} -c "/usr/local/bin/google-authenticator -C -t -f -D -r 3 -Q UTF8 -R 30 -w3" > ${DIR_CLIENT}/authenticator_code.txt
+	DIR_CLIENT="${homeDir}/${CLIENT}"
+	su -c "google-authenticator -t -d -r3 -R30 -W -f -l \"${LABEL}\" -s /etc/openvpn/google-authenticator/${CLIENT}" > ${DIR_CLIENT}/authenticator_code.txt
 
 	exit 0
 }
@@ -1162,6 +1166,7 @@ function revokeClient () {
 
 	echo ""
 	echo "Certificate for client $CLIENT revoked."
+	rm -f /etc/openvpn/google-authenticator/${CLIENT}
 }
 
 function removeUnbound () {
