@@ -985,8 +985,8 @@ fi
 	echo "If you want to add more clients, you simply need to run this script another time!"
 }
 
-function newClintOneLiner(){
-	echo "heelo new client of $1"
+function newClientOneLiner(){
+	echo "heelo new client of $2"
 }
 
 function newClient () {
@@ -1260,7 +1260,7 @@ initialCheck
 if [[ -e /etc/openvpn/server.conf ]]; then
 	# Check if one liner
 	if [[ $1 = "-c" ]]; then
-		newClintOneLiner
+		newClientOneLiner
 	else
 		manageMenu
 	fi
