@@ -986,7 +986,7 @@ fi
 }
 
 function newClientOneLiner(){
-	echo "heelo new client of $2"
+	echo "new client of " $2
 }
 
 function newClient () {
