@@ -986,7 +986,7 @@ fi
 }
 
 function newClientOneLiner(){
-	echo "new client of " $2
+	echo "Create New client  $1"
 }
 
 function newClient () {
@@ -1260,7 +1260,7 @@ initialCheck
 if [[ -e /etc/openvpn/server.conf ]]; then
 	# Check if one liner
 	if [[ $1 = "-c" ]]; then
-		newClientOneLiner
+		newClientOneLiner $2
 	else
 		manageMenu
 	fi
