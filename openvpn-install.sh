@@ -991,7 +991,9 @@ function newClientOneLiner(){
 	echo "Create New Client username is: $CLIENT"
 	cd /etc/openvpn/easy-rsa/ || return
 	./easyrsa build-client-full "$CLIENT" nopass
-	useradd  -p $(openssl passwd -1 $CLIENT_PASSWD) $CLIENT
+	#useradd  -p $(openssl passwd -1 $CLIENT_PASSWD) $CLIENT
+	useradd $CLIENT
+	echo "${CLIENT}:${CLIENT_PASSWD}" | chpasswd
 	# Home directory of the user, where the client configuration (.ovpn) will be written
 	if [ -e "/home/$CLIENT" ]; then  # if $1 is a user name
 		homeDir="/home/$CLIENT"
