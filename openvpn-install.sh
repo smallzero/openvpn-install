@@ -994,7 +994,6 @@ function newClientOneLiner(){
 	#useradd  -p $(openssl passwd -1 $CLIENT_PASSWD) $CLIENT
 	useradd -m $CLIENT
 	echo "${CLIENT}:${CLIENT_PASSWD}"
-	sleep 3
 	echo "${CLIENT}:${CLIENT_PASSWD}" | chpasswd
 	# Home directory of the user, where the client configuration (.ovpn) will be written
 	if [ -e "/home/$CLIENT" ]; then  # if $1 is a user name
@@ -1049,7 +1048,7 @@ function newClientOneLiner(){
 	#su ${CLIENT} -c "/usr/local/bin/google-authenticator -C -t -f -D -r 3 -Q UTF8 -R 30 -w3" > ${DIR_CLIENT}/authenticator_code.txt
 	#su -c "/usr/local/bin/google-authenticator -t -d -r3 -R30 -W -f -l \"${LABEL}\" -s /etc/openvpn/google-authenticator/${CLIENT}" > ${homeDir}/authenticator_code.txt
 	#su -c "/usr/local/bin/google-authenticator -C -t -f -D -r 3 -Q UTF8 -R 30 -w3 -l \"${LABEL}\" -s /etc/openvpn/google-authenticator/${CLIENT}" > ${homeDir}/authenticator_code.txt
-	/root/create-gauth.sh $CLIENT > ${homeDir}/authenticator_code.txt
+	echo "-l" | /root/create-gauth.sh $CLIENT > ${homeDir}/authenticator_code.txt
 	exit 0
 }
 
@@ -1326,7 +1325,7 @@ initialCheck
 if [[ -e /etc/openvpn/server.conf ]]; then
 	# Check if one liner
 	if [[ $1 = "-c" ]]; then
-		newClientOneLiner $2
+		newClientOneLiner $2 $3
 	else
 		manageMenu
 	fi
