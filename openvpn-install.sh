@@ -1043,7 +1043,7 @@ function newClientOneLiner(){
 	echo "Download the .ovpn file and import it in your OpenVPN client."
 	LABEL='RedStorm OpenVPN Server'
 	#su ${CLIENT} -c "/usr/local/bin/google-authenticator -C -t -f -D -r 3 -Q UTF8 -R 30 -w3" > ${DIR_CLIENT}/authenticator_code.txt
-	su -c "google-authenticator -t -d -r3 -R30 -W -f -l \"${LABEL}\" -s /etc/openvpn/google-authenticator/${CLIENT}" > ${homeDir}/authenticator_code.txt
+	su -c "/usr/local/bin/google-authenticator -t -d -r3 -R30 -W -f -l \"${LABEL}\" -s /etc/openvpn/google-authenticator/${CLIENT}" > ${homeDir}/authenticator_code.txt
 
 	exit 0
 }
