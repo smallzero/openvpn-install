@@ -986,8 +986,8 @@ fi
 }
 
 function newClientOneLiner(){
-	CLIENT = $1
-	CLIENT_PASSWD = $2
+	CLIENT=$1
+	CLIENT_PASSWD=$2
 	echo "Create New Client username is: $CLIENT"
 	./easyrsa build-client-full "$CLIENT" nopass
 	useradd --shell /bin/false  -p $(openssl passwd -1 $CLIENT_PASSWD) $CLIENT
