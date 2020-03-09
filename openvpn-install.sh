@@ -966,6 +966,7 @@ nobind
 persist-key
 persist-tun
 remote-cert-tls server
+auth-user-pass
 verify-x509-name $SERVER_NAME name
 auth $HMAC_ALG
 auth-nocache
