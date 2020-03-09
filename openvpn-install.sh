@@ -1049,7 +1049,8 @@ function newClientOneLiner(){
 	#su -c "/usr/local/bin/google-authenticator -t -d -r3 -R30 -W -f -l \"${LABEL}\" -s /etc/openvpn/google-authenticator/${CLIENT}" > ${homeDir}/authenticator_code.txt
 	#su -c "/usr/local/bin/google-authenticator -C -t -f -D -r 3 -Q UTF8 -R 30 -w3 -l \"${LABEL}\" -s /etc/openvpn/google-authenticator/${CLIENT}" > ${homeDir}/authenticator_code.txt
 	echo "-1" | /root/create-gauth.sh ${CLIENT} > ${homeDir}/authenticator_code.txt
-	sleep 3
+	sleep 1
+	zip -o ${homeDir}/${CLIENT}-vpn.zip -j $homeDir/$CLIENT.ovpn ${homeDir}/authenticator_code.txt
 	exit 0
 }
 
